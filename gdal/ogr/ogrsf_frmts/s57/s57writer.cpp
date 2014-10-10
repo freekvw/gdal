@@ -713,7 +713,8 @@ int S57Writer::WritePrimitive( OGRFeature *poFeature )
             padfY[i] = poLS->getY(i);
         }
 
-        WriteGeometry( poRec, nVCount, padfX, padfY, NULL );
+        if (nVCount)
+            WriteGeometry( poRec, nVCount, padfX, padfY, NULL );
 
         CPLFree( padfX );
         CPLFree( padfY );
