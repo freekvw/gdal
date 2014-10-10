@@ -274,7 +274,7 @@ int S57Writer::CreateS57File( const char *pszFilename )
     poFDefn = new DDFFieldDefn();
 
     poFDefn->Create( "SG2D", "2-D coordinate field", "*",
-                     dsc_array, dtc_mixed_data_type );
+                     dsc_array, dtc_bit_string );
 
     poFDefn->AddSubfield( "YCOO", "b24" );
     poFDefn->AddSubfield( "XCOO", "b24" );
@@ -287,7 +287,7 @@ int S57Writer::CreateS57File( const char *pszFilename )
     poFDefn = new DDFFieldDefn();
 
     poFDefn->Create( "SG3D", "3-D coordinate (sounding array) field", "*",
-                     dsc_array, dtc_mixed_data_type );
+                     dsc_array, dtc_bit_string );
 
     poFDefn->AddSubfield( "YCOO", "b24" );
     poFDefn->AddSubfield( "XCOO", "b24" );
