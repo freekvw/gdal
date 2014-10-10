@@ -548,14 +548,13 @@ DDFRecord *S57Writer::MakeRecord()
 {
     DDFRecord *poRec = new DDFRecord( poModule );
     DDFField *poField;
-    unsigned char abyData[3];
+    unsigned char abyData[2];
 
     abyData[0] = nNext0001Index % 256;
     abyData[1] = (unsigned char) (nNext0001Index / 256); 
-    abyData[2] = DDF_FIELD_TERMINATOR;
 
     poField = poRec->AddField( poModule->FindFieldDefn( "0001" ) );
-    poRec->SetFieldRaw( poField, 0, (const char *) abyData, 3 );
+    poRec->SetFieldRaw( poField, 0, (const char *) abyData, 2 );
 
     nNext0001Index++;
 
@@ -581,12 +580,11 @@ int S57Writer::WriteGeometry( DDFRecord *poRec, int nVertCount,
     poField = poRec->AddField( poModule->FindFieldDefn( pszFieldName ) );
 
     if( padfZ )
-        nRawDataSize = 12 * nVertCount + 1;
+        nRawDataSize = 12 * nVertCount;
     else
-        nRawDataSize = 8 * nVertCount + 1;
+        nRawDataSize = 8 * nVertCount;
 
     pabyRawData = (unsigned char *) CPLMalloc(nRawDataSize);
-    pabyRawData[nRawDataSize-1] = DDF_UNIT_TERMINATOR;
 
     for( i = 0; i < nVertCount; i++ )
     {
@@ -888,9 +886,8 @@ int S57Writer::WriteCompleteFeature( OGRFeature *poFeature )
 
         CPLAssert( sizeof(int) == sizeof(GInt32) );
 
-        nRawDataSize = nItemCount * 8 + 1;
+        nRawDataSize = nItemCount * 8;
         pabyRawData = (unsigned char *) CPLMalloc(nRawDataSize);
-        pabyRawData[nRawDataSize-1] = DDF_UNIT_TERMINATOR;
 
         for( i = 0; i < nItemCount; i++ )
         {
