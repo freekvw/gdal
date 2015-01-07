@@ -466,7 +466,7 @@ OGRErr OGRS57DataSource::GetDSExtent( OGREnvelope *psExtent, int bForce )
 /************************************************************************/
 
 int OGRS57DataSource::Create( const char *pszFilename,
-                              CPL_UNUSED char **papszOptions )
+                              char **papszOptions )
 {
 /* -------------------------------------------------------------------- */
 /*      Instantiate the class registrar if possible.                    */
